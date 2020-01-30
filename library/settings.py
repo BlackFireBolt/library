@@ -136,11 +136,11 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
 
-SFTP_STORAGE_HOST = '127.0.0.1'
-SFTP_STORAGE_ROOT = '/home/andreyb/repository_data/'
+SFTP_STORAGE_HOST = '194.158.213.22:22'
+SFTP_STORAGE_ROOT = '/home/andrey/articles/'
 SFTP_STORAGE_PARAMS = {
-    'username': 'andreyb',
-    'password': 'ji1saVlU',
+    'username': 'andrey',
+    'password': 'andrey',
 }
 # MEDIA_URL = 'https://127.0.0.1/'
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
