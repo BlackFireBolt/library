@@ -1,0 +1,27 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{ article_current.title }}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>{{ article_current.topic }}</p> 
+            <p>{{ article_current.description }}</p> 
+            <p>Автор(ы):</p> 
+            <p>
+            {% for author in article_current.author.all %}
+                {{ author.name }}
+            {% endfor %}
+            </p>
+            <p>Год публикации - {{ article_current.publication_year }}</p> 
+            <p>{{ article_current.category }}</p> 
+            <p class="text-right font-italic">{{ article_current.created_at }}</p> 
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-custom" onclick="document.location='{% url 'main:download' obj='Article' pk=article_current.pk %}'">Скачать - {{ article_current.file.size|filesizeformat }}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        </div>
+    </div>
+</div>

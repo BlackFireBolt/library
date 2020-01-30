@@ -1,0 +1,44 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ author }}{% endblock %}
+
+{% block content %}
+    <h2 class="title">{{ author }}:</h2>
+{% if author_filter_list %}
+{% for article in author_filter_list %}
+    <div class="card card-nav-tabs mt-5">
+        <h4 class="card-header card-header-custom title">{{ article.title }}</h4>
+        <div class="card-body">
+            <p class="card-text">{{ article.description }}</p>
+            <p class="text-right font-italic">{{ article.created_at }}</p>
+            <a href="#0" class="btn btn-custom" data-toggle="modal" data-target="#detail{{ article.id }}">Подробнее</a>
+        </div>
+    </div>
+{% endfor %}
+    <div class="pagination justify-content-center">
+        <span class="page-links">
+            {% if author_filter_list.has_previous %}
+            <a href="{% url 'main:author_filter' author=author %}?page={{ author_filter_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_back</i></a>
+            {% endif %}
+            <span class="page-current">
+                Страница {{ author_filter_list.number }} из {{ author_filter_list.paginator.num_pages }}.
+            </span>
+            {% if author_filter_list.has_next %}
+                <a href="{% url 'main:author_filter' author=author %}?page={{ author_filter_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_forward</i></a>
+            {% endif %}
+        </span>
+    </div>
+{% else %}
+    <div>На данный момент статьи не добавлены.</div>
+{% endif %}
+{% endblock %}
+
+{% block modal_init %}
+{% for modal_obj in author_filter_list %}
+    <div class="modal fade" id="detail{{ modal_obj.id }}" tabindex="-1" role="dialog" style="display:none;" aria-hidden="true">
+    {% include 'main/modal_article.html' with article_current=modal_obj %}
+    </div>
+{% endfor %}
+{% endblock %}

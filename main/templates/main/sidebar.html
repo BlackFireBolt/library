@@ -1,0 +1,57 @@
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item dropright">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">edit</i>
+            Темы
+        </a>
+        <div class="dropdown-menu">
+        {% if topics %}
+        {% for topic in topics %}
+            <a class="dropdown-item" href="{% url 'main:topic_filter' topic=topic.title %}">{{ topic.title }}</a>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </li>
+    <li class="nav-item dropright">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">school</i>
+            Кафедры
+        </a>
+        <div class="dropdown-menu">
+        {% if categories %}
+        {% for category in categories %}
+            <a class="dropdown-item" href="{% url 'main:category_filter' category=category.name %}">{{ category.name }}</a>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </li>
+    <li class="nav-item dropright">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">date_range</i>
+            Годы публикации
+        </a>
+        <div class="dropdown-menu">
+        {% if years %}
+        {% for year in years %}
+            <a class="dropdown-item" href="{% url 'main:year_filter' year=year %}">{{ year }}</a>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </li>
+    <li class="nav-item dropright">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">face</i>
+            Авторы
+        </a>
+        <div class="dropdown-menu">
+        {% if authors %}
+        {% for author in authors %}
+            <a class="dropdown-item" href="{% url 'main:author_filter' author=author.name %}">{{ author.name }}</a>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </li>
+    <!--<li class="nav-item">
+        <a class="nav-link" href="#0">Очистить фильтры</a>
+    </li>-->
+</ul>
