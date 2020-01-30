@@ -26,7 +26,7 @@ SECRET_KEY = 'g1#o3g_$_n85gv_qeoyi%(bu7+r+uht10y990z@9h(jbvxc961'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rocky-sea-41207.herokuapp.com']
 
 
 # Application definition
@@ -146,6 +146,7 @@ SFTP_STORAGE_PARAMS = {
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
 SFTP_STORAGE_INTERACTIVE = False
 
-
-
-#heroku config:set DISABLE_COLLECTSTATIC=1
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
