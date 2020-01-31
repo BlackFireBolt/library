@@ -141,8 +141,6 @@ SFTP_STORAGE_ROOT = '/articles/'
 SFTP_STORAGE_PARAMS = {
     'username': 'andreysftp',
     'password': 'andreysftp',
-    'allow_agent': False,
-    'look_for_keys': False,
 }
 # MEDIA_URL = 'https://127.0.0.1/'
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
