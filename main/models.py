@@ -53,7 +53,7 @@ class Author(models.Model):
         verbose_name_plural = 'Авторы'
 
 class Publisher(models.Model):
-    name = models.CharField(max_length=20, verbose_name='Фамилия и инициалы автора')
+    name = models.CharField(max_length=20, verbose_name='Издатель')
 
     def __str__(self):
         return self.name
@@ -82,17 +82,18 @@ class Article(models.Model):
     compiler = models.BooleanField(default=False,verbose_name='Составитель')
     publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Издатель')
     publishing_house = models.CharField(blank=True, max_length=1024, verbose_name='Издательство')
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, verbose_name='Предмет обсуждения')
-    description = models.TextField(verbose_name='Библиографическое описание')
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, verbose_name='Тема')
+    description = models.TextField(verbose_name='Аннотация')
+    bibliographic_description = models.TextField(blank=True, verbose_name='Библиографическое описание')
     publication_year = models.IntegerField(choices=[(r,r) for r in range(1950, 2030)], default='Выберите год', verbose_name='Год публикации')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
     isbn = models.CharField(blank=True, max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>',
                             verbose_name='ISBN')
 
     file = models.FileField(upload_to='articles/', storage=sfs, verbose_name='Файл')
-    image = models.ImageField(blank=True, upload_to='magazines/image/', storage=sfs, verbose_name='Изображение') 
+    image = models.ImageField(blank=True, upload_to='image/magazines', storage=sfs, verbose_name='Изображение') 
 
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
-        ordering = ('topic',)
+        ordering = ('created_at',)

@@ -26,7 +26,7 @@ SECRET_KEY = 'g1#o3g_$_n85gv_qeoyi%(bu7+r+uht10y990z@9h(jbvxc961'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rocky-sea-41207.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'rocky-sea-41207.herokuapp.com']
 
 
 # Application definition
@@ -136,11 +136,13 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
 
-SFTP_STORAGE_HOST = '194.158.213.22:22'
-SFTP_STORAGE_ROOT = '/home/andrey/articles/'
+SFTP_STORAGE_HOST = '194.158.213.22'
+SFTP_STORAGE_ROOT = '/articles/'
 SFTP_STORAGE_PARAMS = {
-    'username': 'andrey',
-    'password': 'andrey',
+    'username': 'andreysftp',
+    'password': 'andreysftp',
+    'allow_agent': False,
+    'look_for_keys': False,
 }
 # MEDIA_URL = 'https://127.0.0.1/'
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
