@@ -17,6 +17,7 @@ from .filters import ArticleFilter
  
 sfs = SFTPStorage()
 
+
 def download(request, obj=None, pk=None):
     try:
         obj_download = Article.objects.get(id=pk)
@@ -31,6 +32,7 @@ def download(request, obj=None, pk=None):
             filename=obj_download.file.name)
         return response
     raise Http404
+
 
 class ArticleListView(ListView):
     model = Article
@@ -56,12 +58,14 @@ class ArticleListView(ListView):
         context['categories'] = SubCategory.objects.all()
         return context
 
+
 def other_page(request, page):
     try:
         template = get_template('main/' + page + '.html')
     except TemplateDoesNotExist:
         raise Http404
     return HttpResponse(template.render(request=request))
+
 
 class SearchResultsView(ListView):
     model = Article
@@ -85,6 +89,7 @@ class SearchResultsView(ListView):
 
         return search_page
 
+
 def topic_filter(request, topic):
     topic_filter = Topic.objects.get(title=topic)
     articles = Article.objects.filter(topic=topic_filter)
@@ -101,6 +106,7 @@ def topic_filter(request, topic):
     
     context = {'topic_filter_list': topic_filter_list, 'topic': topic}
     return render(request, 'main/topic_list.html', context)
+
 
 def author_filter(request, author):
     author_filter = Author.objects.get(name=author)
@@ -119,6 +125,7 @@ def author_filter(request, author):
     context = {'author_filter_list': author_filter_list, 'author': author}
     return render(request, 'main/author_list.html', context)
 
+
 def year_filter(request, year):
     articles = Article.objects.filter(publication_year=year)
     paginator = Paginator(articles, 12)
@@ -134,6 +141,7 @@ def year_filter(request, year):
     
     context = {'year_filter_list': year_filter_list, 'year': year}
     return render(request, 'main/year_list.html', context)
+
 
 def category_filter(request, category):
     category_filter = Category.objects.get(name=category)
