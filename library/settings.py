@@ -26,7 +26,7 @@ SECRET_KEY = 'g1#o3g_$_n85gv_qeoyi%(bu7+r+uht10y990z@9h(jbvxc961'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'rocky-sea-41207.herokuapp.com']
+ALLOWED_HOSTS = ['library.host03032020.of.by']
 
 
 # Application definition
@@ -81,12 +81,29 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
+        'NAME': 'host0303_library',
+        'USER': 'host0303_library',
+        'PASSWORD': 'ji1saVlU',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
+
+# old database postgre
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
+#    }
+#}
 
 
 # Password validation
@@ -125,9 +142,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/library/static/'
+STATIC_ROOT = '/home/host0303/library/library/static/'
+MEDIA_URL = '/library/media/'
+MEDIA_ROOT = '/home/host0303/library/library/media/'
 
 # ftp
 
@@ -145,8 +163,3 @@ SFTP_STORAGE_PARAMS = {
 # MEDIA_URL = 'https://127.0.0.1/'
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
 SFTP_STORAGE_INTERACTIVE = False
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
