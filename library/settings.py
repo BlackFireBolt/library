@@ -142,9 +142,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/library/static/'
+STATIC_URL = '/library/library/static/'
 STATIC_ROOT = '/home/host0303/library/library/static/'
-MEDIA_URL = '/library/media/'
+MEDIA_URL = '/library/library/media/'
 MEDIA_ROOT = '/home/host0303/library/library/media/'
 
 # ftp
