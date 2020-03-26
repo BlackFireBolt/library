@@ -1,5 +1,0 @@
----
-deployment:
-      tasks:
-        - export DEPLOYPATH=/home/host0303/library/library  # Add /<app_folder> if required
-        - /bin/cp -r * $DEPLOYPATH
