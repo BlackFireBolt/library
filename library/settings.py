@@ -144,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/host0303/library/library/static/'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/host0303/library/library/media/'
 
