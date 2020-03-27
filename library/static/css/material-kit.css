@@ -14556,7 +14556,7 @@ textarea {
   font-weight: 500;
   min-width: 100px;
   text-align: center;
-  color: #555;
+  color: #fcdb50;
   transition: all .3s;
   border-radius: 30px;
   padding: 10px 15px;
@@ -18329,10 +18329,9 @@ h3 { text-align: center; }
 }
 */
 .logo-image {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  overflow: hidden;
-  margin-top: -6px;
+  float:left;
 }
 
