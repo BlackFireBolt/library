@@ -151,7 +151,7 @@ materialKit = {
       '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
     });
   },
-
+/*--------------------------------------------------------------------------------------------------------------------*/
   checkScrollForTransparentNavbar: debounce(function() {
     if ($(document).scrollTop() > scroll_distance) {
       if (materialKit.misc.transparent) {
