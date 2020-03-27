@@ -13960,6 +13960,17 @@ textarea {
 
 .nav .nav-item {
   position: relative;
+  background-color: #a50000;
+  border-radius: 8px;
+}
+
+.nav .nav-item .nav-side {
+  background-color: #a50000;
+  border-radius: 8px;
+}
+
+.nav .nav-item .nav-side:hover {
+  background-color: #D83333; /* Add a dark-grey background on hover */
 }
 
 .img-thumbnail {
