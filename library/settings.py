@@ -82,28 +82,28 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'OPTIONS': {
-#            'sql_mode': 'traditional',
-#        },
-#        'NAME': 'host0303_library',
-#        'USER': 'host0303_library',
-#        'PASSWORD': 'ji1saVlU',
-#        'HOST': 'localhost',
-#        'PORT': '3306',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
+        'NAME': 'host0303_library',
+        'USER': 'host0303_library',
+        'PASSWORD': 'ji1saVlU',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 # old database postgre
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
+#    }
+#}
 
 
 # Password validation
