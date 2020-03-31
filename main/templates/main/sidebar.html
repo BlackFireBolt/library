@@ -7,7 +7,7 @@
         <div class="dropdown-menu">
         {% if topics %}
         {% for topic in topics %}
-            <a class="dropdown-item" href="{% url 'main:topic_filter' topic=topic.title %}">{{ topic.title }}</a>
+            <a class="dropdown-item" href="{% url 'main:topic_filter' topic_slug=topic.slug %}">{{ topic.title }}</a>
         {% endfor %}
         {% endif %}
         </div>
@@ -20,7 +20,7 @@
         <div class="dropdown-menu">
         {% if categories %}
         {% for category in categories %}
-            <a class="dropdown-item" href="{% url 'main:category_filter' category=category.name %}">{{ category.name }}</a>
+            <a class="dropdown-item" href="{% url 'main:category_filter' category_slug=category.slug %}">{{ category.name }}</a>
         {% endfor %}
         {% endif %}
         </div>
@@ -46,7 +46,7 @@
         <div class="dropdown-menu">
         {% if authors %}
         {% for author in authors %}
-            <a class="dropdown-item" href="{% url 'main:author_filter' author=author.name %}">{{ author.name }}</a>
+            <a class="dropdown-item" href="{% url 'main:author_filter' author_slug=author.slug %}">{{ author.name }}</a>
         {% endfor %}
         {% endif %}
         </div>

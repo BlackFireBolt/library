@@ -90,72 +90,31 @@ class SearchResultsView(ListView):
         return search_page
 
 
-def topic_filter(request, topic):
-    topic_filter = Topic.objects.get(title=topic)
-    articles = Article.objects.filter(topic=topic_filter)
+def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, year=None):
+    filter_object = None
+    articles = Article.objects.all()
+    if category_slug:
+        filter_object = Category.objects.get(slug=category_slug)
+        articles = Article.objects.filter(category=filter_object)
+    elif year:
+        filter_object = year
+        articles = Article.objects.filter(publication_year=filter_object)
+    elif author_slug:
+        filter_object = Author.objects.get(slug=author_slug)
+        articles = Article.objects.filter(author=filter_object)
+    elif topic_slug:
+        filter_object = Topic.objects.get(slug=topic_slug)
+        articles = Article.objects.filter(topic=filter_object)
     paginator = Paginator(articles, 12)
 
     page = request.GET.get('page')
 
     try:
-        topic_filter_list = paginator.page(page)
+        articles_list = paginator.page(page)
     except PageNotAnInteger:
-        topic_filter_list = paginator.page(1)
+        articles_list = paginator.page(1)
     except EmptyPage:
-        topic_filter_list = paginator.page(paginator.num_pages)
-    
-    context = {'topic_filter_list': topic_filter_list, 'topic': topic}
-    return render(request, 'main/topic_list.html', context)
+        articles_list = paginator.page(paginator.num_pages)
 
-
-def author_filter(request, author):
-    author_filter = Author.objects.get(name=author)
-    articles = Article.objects.filter(author=author_filter)
-    paginator = Paginator(articles, 12)
-
-    page = request.GET.get('page')
-
-    try:
-        author_filter_list = paginator.page(page)
-    except PageNotAnInteger:
-        author_filter_list = paginator.page(1)
-    except EmptyPage:
-        author_filter_list = paginator.page(paginator.num_pages)
-    
-    context = {'author_filter_list': author_filter_list, 'author': author}
-    return render(request, 'main/author_list.html', context)
-
-
-def year_filter(request, year):
-    articles = Article.objects.filter(publication_year=year)
-    paginator = Paginator(articles, 12)
-
-    page = request.GET.get('page')
-
-    try:
-        year_filter_list = paginator.page(page)
-    except PageNotAnInteger:
-        year_filter_list = paginator.page(1)
-    except EmptyPage:
-        year_filter_list = paginator.page(paginator.num_pages)
-    
-    context = {'year_filter_list': year_filter_list, 'year': year}
-    return render(request, 'main/year_list.html', context)
-
-
-def category_filter(request, category):
-    category_filter = Category.objects.get(name=category)
-    categories = Article.objects.filter(category=category_filter)
-    paginator = Paginator(categories, 12)
-
-    page = request.GET.get('page')
-
-    try:
-        category_filter_list = paginator.page(page)
-    except PageNotAnInteger:
-        category_filter_list = paginator.page(1)
-    except EmptyPage:
-        category_filter_list = paginator.page(paginator.num_pages)
-    
-    context = {'category_filter_list': category_filter_list, 'category': category}
-    return render(request, 'main/category_list.html', context)
+    context = {'articles_list': articles_list, 'filter_object': filter_object}
+    return render(request, 'main/filter_page.html', context)

@@ -157,11 +157,13 @@ materialKit = {
       if (materialKit.misc.transparent) {
         materialKit.misc.transparent = false;
         $('.navbar-color-on-scroll').removeClass('navbar-transparent');
+        $('#navbar-logo').attr('src', '/static/img/BGAI_Logo_yellow.png');
       }
     } else {
       if (!materialKit.misc.transparent) {
         materialKit.misc.transparent = true;
         $('.navbar-color-on-scroll').addClass('navbar-transparent');
+        $('#navbar-logo').attr('src', '/static/img/BGAI_Logo_White.png');
       }
     }
   }, 17)

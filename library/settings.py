@@ -26,7 +26,7 @@ SECRET_KEY = 'g1#o3g_$_n85gv_qeoyi%(bu7+r+uht10y990z@9h(jbvxc961'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['library.host03032020.of.by']
+ALLOWED_HOSTS = ['127.0.0.1', 'library.host03032020.of.by']
 
 
 # Application definition
@@ -82,28 +82,28 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        },
-        'NAME': 'host0303_library',
-        'USER': 'host0303_library',
-        'PASSWORD': 'ji1saVlU',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'OPTIONS': {
+#            'sql_mode': 'traditional',
+#        },
+#        'NAME': 'host0303_library',
+#        'USER': 'host0303_library',
+#        'PASSWORD': 'ji1saVlU',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#    }
+#}
 
 
 # old database postgre
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'repo-db.sqlite3'),
+    }
+}
 
 
 # Password validation

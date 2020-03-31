@@ -5,14 +5,18 @@ from storages.backends.sftpstorage import SFTPStorage
 
 sfs = SFTPStorage()
 
+
 class Category(models.Model):
     name = models.CharField(max_length = 100, db_index=True, unique=True, verbose_name='Название')
     order = models.SmallIntegerField(default=0, db_index=True, verbose_name='Порядок')
     super_category = models.ForeignKey('SuperCategory', on_delete=models.PROTECT, null=True, blank=True, verbose_name='Факультет')
+    slug = models.SlugField(max_length=100, db_index=True, unique=True, verbose_name='Алиас')
+
 
 class SuperCategoryManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(super_category__isnull=True)
+
 
 class SuperCategory(Category):
     objects = SuperCategoryManager()
@@ -26,9 +30,11 @@ class SuperCategory(Category):
         verbose_name = 'Факультет'
         verbose_name_plural = 'Факультеты'
 
+
 class SubCategoryManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(super_category__isnull=False)
+
 
 class SubCategory(Category):
     objects = SubCategoryManager()
@@ -42,8 +48,10 @@ class SubCategory(Category):
         verbose_name = 'Кафедра'
         verbose_name_plural = 'Кафедры'
 
+
 class Author(models.Model):
     name = models.CharField(max_length=20, verbose_name='Фамилия и инициалы автора')
+    slug = models.SlugField(max_length=20, db_index=True, unique=True, verbose_name='Алиас')
 
     def __str__(self):
         return self.name
@@ -52,8 +60,10 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
+
 class Publisher(models.Model):
     name = models.CharField(max_length=20, verbose_name='Издатель')
+    slug = models.SlugField(max_length=20, db_index=True, unique=True, verbose_name='Алиас')
 
     def __str__(self):
         return self.name
@@ -65,6 +75,7 @@ class Publisher(models.Model):
 
 class Topic(models.Model):
     title = models.CharField(max_length=30, verbose_name='Предмет обсуждения')
+    slug = models.SlugField(max_length=30, db_index=True, unique=True, verbose_name='Алиас')
 
     def __str__(self):
         return self.title
@@ -74,7 +85,6 @@ class Topic(models.Model):
         verbose_name_plural = 'Темы'
     
 
-
 class Article(models.Model):
     category = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name='Кафедра')
     title = models.CharField(max_length=100, verbose_name='Название')
@@ -83,17 +93,18 @@ class Article(models.Model):
     publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Издатель')
     publishing_house = models.CharField(blank=True, max_length=1024, verbose_name='Издательство')
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, verbose_name='Тема')
-    description = models.TextField(verbose_name='Аннотация')
-    bibliographic_description = models.TextField(blank=True, verbose_name='Библиографическое описание')
-    publication_year = models.IntegerField(choices=[(r,r) for r in range(1950, 2030)], default='Выберите год', verbose_name='Год публикации')
+    description = models.TextField(blank=True, verbose_name='Аннотация')
+    bibliographic_description = models.TextField(verbose_name='Библиографическое описание')
+    publication_year = models.IntegerField(choices=[(r, r) for r in range(1950, 2030)], default='Выберите год', verbose_name='Год публикации')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
     isbn = models.CharField(blank=True, max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>',
                             verbose_name='ISBN')
 
     file = models.FileField(upload_to='articles/', storage=sfs, verbose_name='Файл')
-    image = models.ImageField(blank=True, upload_to='image/magazines', storage=sfs, verbose_name='Изображение') 
+    image = models.ImageField(blank=True, upload_to='image/magazines', storage=sfs, verbose_name='Изображение')
+    slug = models.SlugField(max_length=100, db_index=True, unique=True, verbose_name='Алиас')
 
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
-        ordering = ('created_at',)
+        ordering = ('created_at', )
