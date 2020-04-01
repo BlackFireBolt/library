@@ -71,7 +71,7 @@ class SearchQuerySet(models.query.QuerySet):
             # Handle fields without a related model.
             else:
                 table  = meta.db_table
-                column = meta.get_field(field, many_to_many=False).column
+                column = meta.get_field(field).column
 
             # Add field with `table`.`column` style to columns set.
             columns.add('{}.{}'.format(quote_name(table), quote_name(column)))

@@ -6,12 +6,12 @@
 
 {% block content %}
     <h2 class="title">Результат поиска</h2>
-{% if object_list %}
+{% if articles_list %}
 {% for article in articles_list %}
     <div class="card card-nav-tabs mt-5">
         <h4 class="card-header card-header-custom title">{{ article.title }}</h4>
         <div class="card-body">
-            <p class="card-text">{{ article.description }}</p>
+            <p class="card-text">{{ article.bibliographic_description }}</p>
             <p class="text-right font-italic">{{ article.created_at }}</p>
             <a href="#0" class="btn btn-custom" data-toggle="modal" data-target="#detail{{ article.id }}">Подробнее</a>
         </div>
