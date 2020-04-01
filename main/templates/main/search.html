@@ -7,7 +7,7 @@
 {% block content %}
     <h2 class="title">Результат поиска</h2>
 {% if object_list %}
-{% for article in object_list %}
+{% for article in articles_list %}
     <div class="card card-nav-tabs mt-5">
         <h4 class="card-header card-header-custom title">{{ article.title }}</h4>
         <div class="card-body">
@@ -36,7 +36,7 @@
 {% endblock %}
 
 {% block modal_init %}
-{% for modal_obj in object_list %}
+{% for modal_obj in articles_list %}
     <div class="modal fade" id="detail{{ modal_obj.id }}" tabindex="-1" role="dialog" style="display:none;" aria-hidden="true">
     {% include 'main/modal_article.html' with article_current=modal_obj %}
     </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+from .mysql_search import SearchManager
 from storages.backends.sftpstorage import SFTPStorage 
 
 sfs = SFTPStorage()
@@ -86,6 +87,9 @@ class Topic(models.Model):
     
 
 class Article(models.Model):
+
+    objects = SearchManager(['description', 'title', 'bibliographic_description', 'publishing_house'])
+
     category = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name='Кафедра')
     title = models.CharField(max_length=100, verbose_name='Название')
     author = models.ManyToManyField(Author, verbose_name='Автор')

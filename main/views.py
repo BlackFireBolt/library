@@ -74,20 +74,19 @@ class SearchResultsView(ListView):
 
     def get_queryset(self): 
         query = self.request.GET.get('q')
-        search_vector = SearchVector('category__name', 'author__name', 'topic__title', 'publication_year', 'description', 'title')
-        object_list = Article.objects.annotate(search=search_vector).filter(search=query)
+        object_list = Article.objects.search(query)
         paginator = Paginator(object_list, self.paginate_by)
 
         page = self.request.GET.get('page')
 
         try:
-            search_page = paginator.page(page)
+            articles_list = paginator.page(page)
         except PageNotAnInteger:
-            search_page = paginator.page(1)
+            articles_list = paginator.page(1)
         except EmptyPage:
-            search_page = paginator.page(paginator.num_pages)
+            articles_list = paginator.page(paginator.num_pages)
 
-        return search_page
+        return articles_list
 
 
 def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, year=None):
