@@ -26,7 +26,7 @@ SECRET_KEY = 'g1#o3g_$_n85gv_qeoyi%(bu7+r+uht10y990z@9h(jbvxc961'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'library.host03032020.of.by']
+ALLOWED_HOSTS = ['127.0.0.1', 'library.host03032020.of.by', 'library.bdam.by']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'storages',
     'django_extensions',
     'django_filters',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,11 @@ SFTP_STORAGE_PARAMS = {
 # MEDIA_URL = 'https://127.0.0.1/'
 # SFTP_KNOWN_HOST_FILE = '~/.ssh/known_hosts'
 SFTP_STORAGE_INTERACTIVE = False
+
+# search
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}

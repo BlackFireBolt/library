@@ -23,8 +23,8 @@ admin.site.register(SuperCategory, SuperCategoryAdmin)
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', )
-    prepopulated_fields = {'slug': ('name', )}
+    list_display = ('first_name', 'middle_name', 'last_name', 'slug',)
+    prepopulated_fields = {'slug': ('last_name',)}
 
 
 admin.site.register(Author, AuthorAdmin)

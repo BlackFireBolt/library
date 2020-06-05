@@ -6,17 +6,20 @@
 
 {% block content %}
     <h2 class="title">Результат поиска</h2>
-{% if articles_list %}
-{% for article in articles_list %}
+{% if query %}
+{% for article in page.object_list %}
     <div class="card card-nav-tabs mt-5">
-        <h4 class="card-header card-header-custom title">{{ article.title }}</h4>
+        <h4 class="card-header card-header-custom title">{{ article.object.title }}</h4>
         <div class="card-body">
-            <p class="card-text">{{ article.bibliographic_description }}</p>
-            <p class="text-right font-italic">{{ article.created_at }}</p>
-            <a href="#0" class="btn btn-custom" data-toggle="modal" data-target="#detail{{ article.id }}">Подробнее</a>
+            <p class="card-text">{{ article.object.bibliographic_description }}</p>
+            <p class="text-right font-italic">{{ article.object.created_at }}</p>
+            <a href="#0" class="btn btn-custom" data-toggle="modal" data-target="#detail{{ article.object.id }}">Подробнее</a>
         </div>
     </div>
+{% empty %}
+<div>По данному запросу ничего не найдено</div>
 {% endfor %}
+{% if page.has_previous or page.has_next %}
     <div class="pagination justify-content-center">
         <span class="page-links">
             {% if page_obj.has_previous %}
@@ -30,15 +33,16 @@
             {% endif %}
         </span>
     </div>
+{% endif %}
 {% else %}
     <div>По данному запросу ничего не найдено</div>
 {% endif %}
 {% endblock %}
 
 {% block modal_init %}
-{% for modal_obj in articles_list %}
-    <div class="modal fade" id="detail{{ modal_obj.id }}" tabindex="-1" role="dialog" style="display:none;" aria-hidden="true">
-    {% include 'main/modal_article.html' with article_current=modal_obj %}
+{% for modal_obj in page.object_list %}
+    <div class="modal fade" id="detail{{ modal_obj.object.id }}" tabindex="-1" role="dialog" style="display:none;" aria-hidden="true">
+    {% include 'main/modal_article.html' with article_current=modal_obj.object %}
     </div>
 {% endfor %}
 {% endblock %}

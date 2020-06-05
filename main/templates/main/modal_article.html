@@ -9,10 +9,9 @@
         <div class="modal-body">
             <p>{{ article_current.topic }}</p> 
             <p>{{ article_current.description }}</p> 
-            <p>Автор(ы):</p> 
-            <p>
+            <p>Автор(ы):
             {% for author in article_current.author.all %}
-                {{ author.name }}
+                {{ author }}
             {% endfor %}
             </p>
             <p>Год публикации - {{ article_current.publication_year }}</p> 

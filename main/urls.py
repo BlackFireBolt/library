@@ -11,7 +11,6 @@ urlpatterns = [
     path('kaf/<slug:category_slug>/', filter_page, name='category_filter'),
     path('author/<slug:author_slug>/', filter_page, name='author_filter'),
     path('year/<int:year>/', filter_page, name='year_filter'),
-    path('search/', SearchResultsView.as_view(), name='search'),
     path('<obj>/<int:pk>/', download, name='download'),
     path('<str:page>/', other_page, name='other'),
     path('', ArticleListView.as_view(), name='index'),

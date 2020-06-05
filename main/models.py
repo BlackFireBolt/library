@@ -51,11 +51,16 @@ class SubCategory(Category):
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=20, verbose_name='Фамилия и инициалы автора')
+    first_name = models.CharField(max_length=20, verbose_name='Имя автора')
+    middle_name = models.CharField(max_length=20, verbose_name='Отчество автора', blank=True)
+    last_name = models.CharField(max_length=20, verbose_name='Фамилия автора')
     slug = models.SlugField(max_length=20, db_index=True, unique=True, verbose_name='Алиас')
 
     def __str__(self):
-        return self.name
+        if self.middle_name:
+            return u'%s %s %s' % (self.first_name, self.middle_name, self.last_name)
+        else:
+            return u'%s %s' % (self.first_name, self.last_name)
 
     class Meta:
         verbose_name = 'Автор'
@@ -87,8 +92,6 @@ class Topic(models.Model):
     
 
 class Article(models.Model):
-
-    objects = SearchManager(['description', 'title', 'bibliographic_description', 'publishing_house'])
 
     category = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name='Кафедра')
     title = models.CharField(max_length=100, verbose_name='Название')

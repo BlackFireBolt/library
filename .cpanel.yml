@@ -1,5 +1,5 @@
 ---
 deployment:
       tasks:
-        - export DEPLOYPATH=/home/host0303/library.host03032020.of.by  # Add /<app_folder> if required
+        - export DEPLOYPATH=/home/host0303/library.bdam.by  # Add /<app_folder> if required
         - /bin/cp -a * $DEPLOYPATH

@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.contrib.postgres.search import SearchVector
 import mimetypes
 from storages.backends.sftpstorage import SFTPStorage
+from haystack.generic_views import SearchView
 
 from .models import SubCategory, Article, Topic, Author, Category
 from .forms import SearchForm
@@ -67,9 +68,9 @@ def other_page(request, page):
     return HttpResponse(template.render(request=request))
 
 
-class SearchResultsView(ListView):
+class SearchResultsViewOLD(ListView):
     model = Article
-    template_name = 'main/search.html'
+    template_name = 'search/search.html'
     paginate_by = 12
 
     def get_queryset(self): 
@@ -87,6 +88,25 @@ class SearchResultsView(ListView):
             articles_list = paginator.page(paginator.num_pages)
 
         return articles_list
+
+
+class SearchResultsView(SearchView):
+    template_name = 'search/search.html'
+    paginate_by = 12
+
+
+def build_page(self):
+    paginator = Paginator(self.queryset, self.paginate_by)
+    page = self.request.GET.get('page')
+
+    try:
+        object_list = paginator.page(page)
+    except PageNotAnInteger:
+        object_list = paginator.page(1)
+    except EmptyPage:
+        object_list = paginator.page(paginator.num_pages)
+
+    return object_list
 
 
 def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, year=None):

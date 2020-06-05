@@ -58,7 +58,7 @@
                             <a href="{% url 'main:other' page='about' %}" class="nav-link">О сайте</a>
                         </li>
                     </ul>
-                    <form class="form-inline ml-auto" action="{% url 'main:search' %}" method="get">
+                    <form class="form-inline ml-auto" action="{% url 'haystack_search' %}" method="get">
                        <div class="form-group no-border">
                             <input name="q" type="text" class="form-control" placeholder="Поиск">
                         </div>
