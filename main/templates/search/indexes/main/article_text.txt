@@ -1,0 +1,15 @@
+{{ object.title }}
+{{ object.description }}
+{{ object.bibliographic_description }}
+{{ object.publishing_house }}
+{% for author in object.author.all %}
+    {{ author.first_name }}
+    {{ author.middle_name }}
+    {{ author.last_name }}
+{% endfor %}
+{{ object.author.name }}
+{{ object.topic.title }}
+{{ object.category.name }}
+{{ object.category.super_category }}
+{{ object.isbn }}
+{{ object.publication_year }}

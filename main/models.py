@@ -106,6 +106,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
     isbn = models.CharField(blank=True, max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>',
                             verbose_name='ISBN')
+    doi = models.CharField(blank=True, max_length=32, help_text='<a href="https://www.doi.org/">DOI index</a>')
 
     file = models.FileField(upload_to='articles/', storage=sfs, verbose_name='Файл')
     image = models.ImageField(blank=True, upload_to='image/magazines', storage=sfs, verbose_name='Изображение')
