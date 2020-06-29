@@ -23,7 +23,18 @@ admin.site.register(SuperCategory, SuperCategoryAdmin)
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'middle_name', 'last_name', 'slug',)
+    list_display = ('first_name', 'middle_name', 'last_name', 'initials',  'slug',)
+    fieldsets = (
+        (None, {
+            'fields': ('first_name', 'middle_name', 'last_name', 'initials')
+        }),
+        ('На белорусском языке', {
+            'fields': ('first_name_bel', 'middle_name_bel', 'last_name_bel', 'initials_bel')
+        }),
+        ('Алиас', {
+            'fields': ('slug', )
+        }),
+    )
     prepopulated_fields = {'slug': ('last_name',)}
 
 
@@ -49,7 +60,7 @@ admin.site.register(Topic, TopicAdmin)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'category', 'topic', 'publication_year')
     fields = ('title','slug', 'category', ('publication_year', 'topic'), ('author', 'compiler'),
-              ('publisher', 'publishing_house'), 'description', 'bibliographic_description', 'isbn', 'doi',
+              ('publisher', 'publishing_house'), 'description', 'bibliographic_description', 'keywords', 'isbn', 'doi', 'language',
               ('file', 'image'))
     prepopulated_fields = {'slug': ('title', )}
 

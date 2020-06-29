@@ -13,6 +13,7 @@ class ArticleIndex(indexes.SearchIndex, indexes.Indexable):
     publishing_house = indexes.CharField(model_attr='publishing_house')
     isbn = indexes.CharField(model_attr='isbn')
     publication_year = indexes.IntegerField(model_attr='publication_year')
+    keywords = indexes.CharField(model_attr='keywords')
 
     def prepare_author(self, object):
         return [author.last_name for author in object.author.all()]

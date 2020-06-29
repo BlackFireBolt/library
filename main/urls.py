@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import ArticleListView, SearchResultsView
+from .views import ArticleListView #SearchResultsView
 from .views import other_page
 from .views import download
 from .views import filter_page

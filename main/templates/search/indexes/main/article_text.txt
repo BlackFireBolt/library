@@ -6,8 +6,12 @@
     {{ author.first_name }}
     {{ author.middle_name }}
     {{ author.last_name }}
+    {{ author.first_name_bel }}
+    {{ author.middle_name_bel }}
+    {{ author.last_name_bel }}
 {% endfor %}
 {{ object.author.name }}
+{{ object.keywords }}
 {{ object.topic.title }}
 {{ object.category.name }}
 {{ object.category.super_category }}
