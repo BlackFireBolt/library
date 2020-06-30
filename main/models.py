@@ -99,7 +99,7 @@ class Topic(models.Model):
 
 class Article(models.Model):
 
-    category = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name='Кафедра', blank=True)
+    category = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name='Кафедра', blank=True, null=True)
     title = models.CharField(max_length=100, verbose_name='Название')
     author = models.ManyToManyField(Author, verbose_name='Автор')
     compiler = models.BooleanField(default=False, verbose_name='Составитель')
