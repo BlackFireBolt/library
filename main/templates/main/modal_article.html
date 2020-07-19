@@ -1,4 +1,4 @@
-<div class="modal-dialog" role="document">
+<div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title">{{ article_current.title }}</h4>
@@ -7,12 +7,31 @@
             </button>
         </div>
         <div class="modal-body">
-            <p>{{ article_current.topic }}</p> 
-            <p>{{ article_current.description }}</p> 
+            <p>{{ article_current.topic }}</p>
+            <p>{{ article_current.keywords }}</p>
+            <p>{{ article_current.description }}</p>
+            {% if article_current.compiler %}
+            <p>Составитель(и):
+                {% else %}
             <p>Автор(ы):
+                {% endif %}
+            {% if article_current.language == r %}
             {% for author in article_current.author.all %}
                 {{ author }}
             {% endfor %}
+            {% elif article_current.language == b %}
+            {% for author in article_current.author.all %}
+            {% if article_current.middle_name_bel or article_current.first_name_bel %}
+            {% if article_current.middle_name_bel %}
+            {{ author.last_name_bel }} {{ author.first_name_bel }} {{ author.middle_name_bel }}
+            {% else %}
+            {{ author.last_name_bel }} {{ author.first_name_bel }}
+            {% endif %}
+            {% else %}
+            {{ author.last_name_bel }} {{ author.initials_bel }}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
             </p>
             <p>Год публикации - {{ article_current.publication_year }}</p> 
             <p>{{ article_current.category }}</p> 

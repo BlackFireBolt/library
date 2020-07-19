@@ -115,6 +115,7 @@ def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, 
     if category_slug:
         filter_object = Category.objects.get(slug=category_slug)
         articles = Article.objects.filter(category=filter_object)
+        filter_object = filter_object.name
     elif year:
         filter_object = year
         articles = Article.objects.filter(publication_year=filter_object)

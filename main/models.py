@@ -60,7 +60,7 @@ class Author(models.Model):
     slug = models.SlugField(max_length=20, db_index=True, unique=True, verbose_name='Алиас')
 
     def __str__(self):
-        if self.middle_name and self.first_name:
+        if self.middle_name or self.first_name:
             if self.middle_name:
                 return u'%s %s %s' % (self.last_name, self.first_name, self.middle_name)
             else:
@@ -71,6 +71,7 @@ class Author(models.Model):
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
+        ordering = ['last_name', 'first_name', 'last_name', 'initials']
 
 
 class Publisher(models.Model):
@@ -129,7 +130,10 @@ class Article(models.Model):
     image = models.ImageField(blank=True, upload_to='image/magazines', storage=sfs, verbose_name='Изображение')
     slug = models.SlugField(max_length=100, db_index=True, unique=True, verbose_name='Алиас')
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
-        ordering = ('created_at', )
+        ordering = ['-created_at', ]
