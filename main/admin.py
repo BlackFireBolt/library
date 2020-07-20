@@ -61,7 +61,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'category', 'topic', 'publication_year')
     fields = ('title','slug', 'category', ('publication_year', 'topic'), ('author', 'compiler'),
               ('publisher', 'publishing_house'), 'description', 'bibliographic_description', 'keywords', 'isbn', 'doi', 'language',
-              ('file', 'image'), 'created_at')
+              ('file', 'image'))
     prepopulated_fields = {'slug': ('title', )}
 
 

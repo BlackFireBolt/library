@@ -112,19 +112,28 @@ def build_page(self):
 def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, year=None):
     filter_object = None
     articles = Article.objects.all()
+    filter_type = None
+    filter_object_name = None
     if category_slug:
         filter_object = Category.objects.get(slug=category_slug)
         articles = Article.objects.filter(category=filter_object)
-        filter_object = filter_object.name
+        filter_object_name = filter_object.name
+        filter_type = 'kaf'
     elif year:
         filter_object = year
         articles = Article.objects.filter(publication_year=filter_object)
+        filter_type = 'year'
+        filter_object_name = filter_object
     elif author_slug:
         filter_object = Author.objects.get(slug=author_slug)
         articles = Article.objects.filter(author=filter_object)
+        filter_type = 'author'
+        filter_object_name = filter_object
     elif topic_slug:
         filter_object = Topic.objects.get(slug=topic_slug)
         articles = Article.objects.filter(topic=filter_object)
+        filter_type = 'topic'
+        filter_object_name = filter_object
     paginator = Paginator(articles, 12)
 
     page = request.GET.get('page')
@@ -136,5 +145,6 @@ def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, 
     except EmptyPage:
         articles_list = paginator.page(paginator.num_pages)
 
-    context = {'articles_list': articles_list, 'filter_object': filter_object}
+    context = {'articles_list': articles_list, 'filter_object': filter_object, 'filter_object_name': filter_object_name,
+               'filter_type': filter_type}
     return render(request, 'main/filter_page.html', context)

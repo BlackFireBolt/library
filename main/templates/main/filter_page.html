@@ -5,7 +5,7 @@
 {% block title %}{{ filter_object }}{% endblock %}
 
 {% block content %}
-<h2 class="title">{{ filter_object }}:</h2>
+<h2 class="title">{{ filter_object_name }}:</h2>
 {% if articles_list %}
 {% for article in articles_list %}
 <div class="card card-nav-tabs mt-5">
@@ -20,13 +20,13 @@
 <div class="pagination justify-content-center">
         <span class="page-links">
             {% if articles_list.has_previous %}
-            <a href="{% url 'main:author_filter' author=author %}?page={{ author_filter_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_back</i></a>
+            <a href="/{{ filter_type }}/{{ filter_object }}/?page={{ articles_list.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_back</i></a>
             {% endif %}
             <span class="page-current">
-                Страница {{ articles_list.number }} из {{ author_filter_list.paginator.num_pages }}.
+                Страница {{ articles_list.number }} из {{ articles_list.paginator.num_pages }}.
             </span>
             {% if articles_list.has_next %}
-                <a href="{% url 'main:author_filter' author=author %}?page={{ author_filter_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_forward</i></a>
+                <a href="/{{ filter_type }}/{{ filter_object }}/?page={{ articles_list.next_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_forward</i></a>
             {% endif %}
         </span>
 </div>
