@@ -5,7 +5,7 @@ from .models import Article
 class ArticleIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')
-    category = indexes.CharField(model_attr='category')
+    category = indexes.CharField(model_attr='category', null=True)
     author = indexes.MultiValueField()
     topic = indexes.CharField(model_attr='topic')
     description = indexes.CharField(model_attr='description')
