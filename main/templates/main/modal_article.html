@@ -15,11 +15,11 @@
                 {% else %}
             <p>Автор(ы):
                 {% endif %}
-            {% if article_current.language == r %}
+            {% if article_current.language == 'r' %}
             {% for author in article_current.author.all %}
                 {{ author }}
             {% endfor %}
-            {% elif article_current.language == b %}
+            {% elif article_current.language == 'b' %}
             {% for author in article_current.author.all %}
             {% if article_current.middle_name_bel or article_current.first_name_bel %}
             {% if article_current.middle_name_bel %}
