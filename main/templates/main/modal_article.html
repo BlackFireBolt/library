@@ -10,6 +10,7 @@
             <p>{{ article_current.topic }}</p>
             <p>{{ article_current.keywords }}</p>
             <p>{{ article_current.description }}</p>
+            {% if article_current.empty_author is not True %}
             {% if article_current.compiler %}
             <p>Составитель(и):
                 {% else %}
@@ -32,9 +33,11 @@
             {% endif %}
             {% endfor %}
             {% endif %}
+            {% endif %}
             </p>
             <p>Год публикации - {{ article_current.publication_year }}</p> 
-            <p>{{ article_current.category }}</p> 
+            <p>{{ article_current.category }}</p>
+            <p>{{ article_current.bibliographic_description }}</p>
             <p class="text-right font-italic">{{ article_current.created_at }}</p> 
         </div>
         <div class="modal-footer">

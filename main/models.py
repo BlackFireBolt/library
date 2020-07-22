@@ -104,6 +104,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
     author = models.ManyToManyField(Author, verbose_name='Автор')
     compiler = models.BooleanField(default=False, verbose_name='Составитель')
+    empty_author = models.BooleanField(default=False, verbose_name='Автор отсутствует')
     publisher = models.ForeignKey(Publisher, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Издатель')
     publishing_house = models.CharField(blank=True, max_length=1024, verbose_name='Издательство')
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, verbose_name='Тема')
