@@ -119,21 +119,25 @@ def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, 
         articles = Article.objects.filter(category=filter_object)
         filter_object_name = filter_object.name
         filter_type = 'kaf'
+        filter_object = filter_object.slug
     elif year:
         filter_object = year
         articles = Article.objects.filter(publication_year=filter_object)
         filter_type = 'year'
         filter_object_name = filter_object
+        filter_object = filter_object.slug
     elif author_slug:
         filter_object = Author.objects.get(slug=author_slug)
         articles = Article.objects.filter(author=filter_object)
         filter_type = 'author'
         filter_object_name = filter_object
+        filter_object = filter_object.slug
     elif topic_slug:
         filter_object = Topic.objects.get(slug=topic_slug)
         articles = Article.objects.filter(topic=filter_object)
         filter_type = 'topic'
         filter_object_name = filter_object
+        filter_object = filter_object.slug
     paginator = Paginator(articles, 12)
 
     page = request.GET.get('page')
