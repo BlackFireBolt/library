@@ -33,7 +33,7 @@
         <div class="dropdown-menu">
         {% if years %}
         {% for year in years %}
-            <a class="dropdown-item" href="{% url 'main:year_filter' year=year %}">{{ year }}</a>
+            <a class="dropdown-item" href="{% url 'main:year_filter' year=year %}" data-flip="false">{{ year }}</a>
         {% endfor %}
         {% endif %}
         </div>

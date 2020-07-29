@@ -1,29 +1,31 @@
-from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
+from django.shortcuts import render
 from django.http import HttpResponse, Http404
-from django.template import TemplateDoesNotExist, Library, Node
+from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.list import ListView
-from django.db.models import Q
-from django.contrib.postgres.search import SearchVector
 import mimetypes
 from storages.backends.sftpstorage import SFTPStorage
 from haystack.generic_views import SearchView
 
-from .models import SubCategory, Article, Topic, Author, Category
-from .forms import SearchForm
-from .filters import ArticleFilter
+from .models import Article, Topic, Author, Category
+from archive.models import NewsImage
  
 sfs = SFTPStorage()
 
 
 def download(request, obj=None, pk=None):
-    try:
-        obj_download = Article.objects.get(id=pk)
-    except Article.DoesNotExist:
-        raise Http404 
+    obj_download = None
+    if obj == 'Article':
+        try:
+            obj_download = Article.objects.get(id=pk)
+        except Article.DoesNotExist:
+            raise Http404
+    elif obj == 'NewsImage':
+        try:
+            obj_download = NewsImage.objects.get(id=pk)
+        except NewsImage.DoesNotExist:
+            raise Http404
        
     if sfs.exists(obj_download.file.name):
         file = sfs._read(obj_download.file.name)
@@ -55,8 +57,6 @@ class ArticleListView(ListView):
             article_page = paginator.page(paginator.num_pages)
 
         context['article_list'] = article_page
-        context['authors'] = Author.objects.all()
-        context['categories'] = SubCategory.objects.all()
         return context
 
 
@@ -125,7 +125,6 @@ def filter_page(request, topic_slug=None, category_slug=None, author_slug=None, 
         articles = Article.objects.filter(publication_year=filter_object)
         filter_type = 'year'
         filter_object_name = filter_object
-        filter_object = filter_object.slug
     elif author_slug:
         filter_object = Author.objects.get(slug=author_slug)
         articles = Article.objects.filter(author=filter_object)

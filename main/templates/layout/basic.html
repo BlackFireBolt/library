@@ -55,6 +55,11 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a href="{% url 'archive:archive' %}" class="nav-link">Архив новостей</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
                             <a href="{% url 'main:other' page='about' %}" class="nav-link">О сайте</a>
                         </li>
                     </ul>
@@ -71,7 +76,9 @@
         </nav>
         <!-- navbar section end -->
         <!-- header section -->
-        <div class="page-header header-filter clear-filter" data-parallax="true" style="background-image: url({% static 'img/RPzast-logo.jpg' %});">
+        {% block header %}
+        <div class="page-header page-header-other header-filter clear-filter" data-parallax="true" style="background-image: url({% static 'img/RPzast-logo.jpg' %});">
+            {% endblock %}
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto">
@@ -88,16 +95,8 @@
             <div class="section section-basic">
                 <div class="container">
                     <!-- content section -->
-                    <div class="parent">
-                        <div class="div1">
-                            {% include 'main/sidebar.html' %}
-                        </div>
-                        <div class="div2"> 
-                            {% bootstrap_messages %}
-                            {% block content %}
-                            {% endblock %}
-                        </div>
-                    </div>
+                    {% block content %}
+                    {% endblock %}
                     <!-- content section end -->
                 </div>
             </div>

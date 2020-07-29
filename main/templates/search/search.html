@@ -5,6 +5,12 @@
 {% block title %}Поиск{% endblock %}
 
 {% block content %}
+<div class="parent">
+                        <div class="div1">
+                            {% include 'main/sidebar.html' %}
+                        </div>
+                        <div class="div2">
+                            {% bootstrap_messages %}
     <h2 class="title">Результат поиска</h2>
 {% if query %}
 {% for article in page.object_list %}
@@ -37,6 +43,8 @@
 {% else %}
     <div>По данному запросу ничего не найдено</div>
 {% endif %}
+                             </div>
+                    </div>
 {% endblock %}
 
 {% block modal_init %}

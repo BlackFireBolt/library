@@ -5,6 +5,12 @@
 {% block title %}{{ filter_object_name }}{% endblock %}
 
 {% block content %}
+<div class="parent">
+    <div class="div1">
+        {% include 'main/sidebar.html' %}
+    </div>
+    <div class="div2">
+        {% bootstrap_messages %}
 <h2 class="title">{{ filter_object_name }}:</h2>
 {% if articles_list %}
 {% for article in articles_list %}
@@ -33,6 +39,8 @@
 {% else %}
 <div>На данный момент статьи не добавлены.</div>
 {% endif %}
+        </div>
+                    </div>
 {% endblock %}
 
 {% block modal_init %}

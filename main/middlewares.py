@@ -1,14 +1,10 @@
-from .models import SubCategory, Article, Author, Topic
+from .models import SubCategory, Author, Topic
+
 
 def repository_context_processor(request):
     choices = [*range(2001, 2023, 1)]
-    context = {}
-    context['authors'] = Author.objects.all()
-    context['categories'] = SubCategory.objects.all()
-    context['topics'] = Topic.objects.all()
-    context['years'] = choices
-    context['keyword'] = ''
-    context['all'] = ''
+    context = {'authors': Author.objects.all(), 'categories': SubCategory.objects.all(), 'topics': Topic.objects.all(),
+               'years': choices, 'keyword': '', 'all': ''}
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:

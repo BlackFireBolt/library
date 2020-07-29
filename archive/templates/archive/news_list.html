@@ -1,0 +1,34 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+    <h2 class="title">Архив новостей</h2>
+{% if object_list %}
+{% for news in object_list %}
+    <div class="card card-nav-tabs mt-5">
+        <h4 class="card-header card-header-custom title">{{ news.title }}</h4>
+        <div class="card-body">
+            <p class="card-text">{{ news.text|truncatechars:128 }}</p>
+            <p class="text-right font-italic">{{ news.publication_date }}</p>
+            <a href="{% url 'archive:news_detail' pk=news.pk %}" class="btn btn-custom">Подробнее</a>
+        </div>
+    </div>
+{% empty %}
+    <div>На данный момент статьи не добавлены.</div>
+{% endfor %}
+    <div class="pagination justify-content-center">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="/?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_back</i></a>
+            {% endif %}
+            <span class="page-current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="/?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}"><i class="material-icons">arrow_forward</i></a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,8 +1,19 @@
 {% extends "layout/basic.html" %}
 
 {% load bootstrap4 %}
+{% load static %}
+
+{% block header %}
+<div class="page-header header-filter clear-filter" data-parallax="true" style="background-image: url({% static 'img/RPzast-logo.jpg' %});">
+{% endblock %}
 
 {% block content %}
+<div class="parent">
+                        <div class="div1">
+                            {% include 'main/sidebar.html' %}
+                        </div>
+                        <div class="div2">
+                            {% bootstrap_messages %}
     <h2 class="title">Все материалы</h2>
 {% if object_list %}
 {% for article in object_list %}
@@ -31,6 +42,8 @@
         </span>
     </div>
 {% endif %}
+</div>
+                    </div>
 {% endblock %}
 
 {% block modal_init %}

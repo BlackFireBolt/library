@@ -3411,7 +3411,7 @@ tbody.collapse.show {
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 1050;
   display: none;
   float: left;
   min-width: 10rem;
@@ -18334,4 +18334,11 @@ h3 { text-align: center; }
   float:left;
   margin-top: -4px;
 }
-
+/* custom image */
+.text-img {
+  text-align: center;
+}
+/* custom header */
+.page-header-other {
+  height: 30vh !important;
+}
