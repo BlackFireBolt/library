@@ -177,6 +177,7 @@ HAYSTACK_CONNECTIONS = {
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+TINYMCE_JS_URL = 'http://debug.example.org/tiny_mce/tiny_mce_src.js'
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
     "width": "960px",
@@ -190,3 +191,5 @@ TINYMCE_DEFAULT_CONFIG = {
     "a11ycheck ltr rtl | showcomments addcomment code",
     "custom_undo_redo_levels": 10,
 }
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
