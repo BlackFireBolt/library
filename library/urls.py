@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/', include('haystack.urls'), name='search'),
     path('archive/', include('archive.urls')),
-    path('', include('main.urls', namespace='')), 
+    path('tinymce/', include('tinymce.urls')),
+    path('', include('main.urls', namespace='')),
 ]
 
 if settings.DEBUG:

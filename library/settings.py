@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'haystack',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +176,9 @@ HAYSTACK_CONNECTIONS = {
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}

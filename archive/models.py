@@ -1,12 +1,13 @@
 from django.db import models
 from storages.backends.sftpstorage import SFTPStorage
+from tinymce.models import HTMLField
 
 sfs = SFTPStorage()
 
 
 class News(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
-    text = models.TextField(verbose_name='Текст')
+    text = HTMLField(verbose_name='Текст')
     publication_date = models.DateField(verbose_name='Дата публикации')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
 
