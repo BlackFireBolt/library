@@ -8,7 +8,7 @@
     <div align="justify">{{ news.text }}</div>
     {% for image in news_image %}
     {% if news.pk == image.news.pk %}
-    <p class="text-img mt-5"><img  src="{% url 'main:download' obj='NewsImage' pk=image.pk %}"></p>
+    <p class="text-img mt-5"><img class="css-adaptive" src="{% url 'main:download' obj='NewsImage' pk=image.pk %}"></p>
     {% endif %}
     {% endfor %}
 {% endblock %}
