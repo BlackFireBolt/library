@@ -5,7 +5,7 @@
 {% block content %}
     <h2 class="title">{{ news.title }}</h2>
     <p align="right">{{ news.publication_date }}</p>
-    <div>{{ news.text }}</div>
+    {{ news.text|safe }}
     {% for image in news_image %}
     {% if news.pk == image.news.pk %}
     <p class="text-img mt-5"><img class="css-adaptive" src="{% url 'main:download' obj='NewsImage' pk=image.pk %}"></p>
