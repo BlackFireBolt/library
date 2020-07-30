@@ -11,6 +11,6 @@
     <p class="text-img mt-5"><img class="css-adaptive" src="{% url 'main:download' obj='NewsImage' pk=image.pk %}"></p>
     {% endif %}
     {% endfor %}
-    <a href="{% url 'archive:archive' %}" class="btn btn-custom">Назад</a>
+    <p><a href="{% url 'archive:archive' %}" class="btn btn-custom">Назад</a></p>
 {% endblock %}
 
