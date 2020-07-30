@@ -9,7 +9,7 @@
     <div class="card card-nav-tabs mt-5">
         <h4 class="card-header card-header-custom title">{{ news.title }}</h4>
         <div class="card-body">
-            <p class="card-text">{{ news.text|truncatechars_html:128 }}</p>
+            <p class="card-text">{{ news.text|truncatechars_html:128|safe }}</p>
             <p class="text-right font-italic">{{ news.publication_date }}</p>
             <a href="{% url 'archive:news_detail' pk=news.pk %}" class="btn btn-custom">Подробнее</a>
         </div>
