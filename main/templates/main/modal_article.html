@@ -12,26 +12,26 @@
             <p>{{ article_current.description }}</p>
             {% if article_current.empty_author is not True %}
             {% if article_current.compiler %}
-            <p>Составитель(и):
+            <p>Составитель(и):<br>
                 {% else %}
-            <p>Автор(ы):
+            <p>Автор(ы):<br>
                 {% endif %}
             {% if article_current.language == 'r' %}
-            {% for author in article_current.author.all %}
-                {{ author }}
-            {% endfor %}
+                {% for author in article_current.author.all %}
+                    {{ author }}<br>
+                {% endfor %}
             {% elif article_current.language == 'b' %}
-            {% for author in article_current.author.all %}
-            {% if article_current.middle_name_bel or article_current.first_name_bel %}
-            {% if article_current.middle_name_bel %}
-            {{ author.last_name_bel }} {{ author.first_name_bel }} {{ author.middle_name_bel }}
-            {% else %}
-            {{ author.last_name_bel }} {{ author.first_name_bel }}
-            {% endif %}
-            {% else %}
-            {{ author.last_name_bel }} {{ author.initials_bel }}
-            {% endif %}
-            {% endfor %}
+                {% for author in article_current.author.all %}
+                    {% if article_current.middle_name_bel or article_current.first_name_bel %}
+                        {% if article_current.middle_name_bel %}
+                            {{ author.last_name_bel }} {{ author.first_name_bel }} {{ author.middle_name_bel }}<br>
+                        {% else %}
+                            {{ author.last_name_bel }} {{ author.first_name_bel }}<br>
+                        {% endif %}
+                    {% else %}
+                        {{ author.last_name_bel }} {{ author.initials_bel }}<br>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
             {% endif %}
             </p>
